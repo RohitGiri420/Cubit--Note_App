@@ -53,8 +53,4 @@ class DbHelper{
     var db = await getDb();
     await db.delete(TABLENAME,where: "$NOTEID=?",whereArgs: [id.toString()]);
   }
-
-
-
-
 }
