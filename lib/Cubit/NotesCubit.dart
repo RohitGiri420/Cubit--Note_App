@@ -4,25 +4,47 @@ import 'package:cubit_note_app/Models/NoteModel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotesCubit extends Cubit<NoteState>{
-    DbHelper dbHelper;
-    NotesCubit({required this.dbHelper}):super(initialState());
-    
-    addData(NoteModel noteModel)async{
-      emit(LoadingState());
-      bool check = await dbHelper.addData(noteModel);
-      if(check){
-        var data = await dbHelper.FetchData();
-        emit(LoadedState(arrlist: data));
-      }
-      else{
-        emit(errorState(errorMessage: "getting error while adding data"));
-      }
+  DbHelper dbHelper;
+  NotesCubit({required this.dbHelper}):super(initialState());
 
-    }
 
-    getData() async{
-      emit(LoadingState());
-      var data = await dbHelper.FetchData();
-      emit(LoadedState(arrlist: data));
+  AddData(NoteModel noteModel) async{
+    emit(LoadingState());
+    bool check = await DbHelper().addData(noteModel);
+    if(check){
+      var Note = await DbHelper().FetchData();
+      emit(LoadedState(arrlist: Note));
     }
+    else{
+      emit(errorState(errorMessage: "error while adding adding data"));
+    }
+  }
+
+  FetchData() async{
+    emit(LoadingState());
+    var Notes = await  DbHelper().FetchData();
+    emit(LoadedState(arrlist: Notes));
+  }
+
+  UpdateData(NoteModel noteModel) async{
+    emit(LoadingState());
+    var check = await DbHelper().UpdateData(noteModel);
+
+    if(check){
+    var Note = await DbHelper().FetchData();
+    emit(LoadedState(arrlist: Note));
+    }
+    else{
+      emit(errorState(errorMessage: "getting error while updating data"));
+    }
+  }
+
+  DeleteData(int id) async{
+    emit(LoadingState());
+    var check = await DbHelper().DeleteData(id);
+    if(check){
+      var Note =await DbHelper().FetchData();
+      emit(LoadedState(arrlist: Note));
+    }
+  }
 }

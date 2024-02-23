@@ -28,7 +28,7 @@ class _AddNoteState extends State<AddNote> {
             ElevatedButton(onPressed: (){
               String title = titleController.text.toString();
               String desc = descController.text.toString();
-              context.read<NotesCubit>().addData(NoteModel(title: title, description: desc));
+              context.read<NotesCubit>().AddData(NoteModel(title: title, description: desc));
               Navigator.pop(context);
             }, child: Text("Add Note"))
           ],
