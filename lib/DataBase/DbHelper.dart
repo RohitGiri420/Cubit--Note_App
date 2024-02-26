@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:cubit_note_app/Models/NoteModel.dart';
@@ -6,14 +7,13 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DbHelper{
-  DbHelper db = DbHelper();
-
-  static String TABLENAME="Note Table";
-  static String NOTEID="Note Id";
+  static String TABLENAME="NoteTable";
+  static String NOTEID="NoteId";
   static String NOTETITLE="TITLE";
   static String NOTEDESC="Description";
 
   Database? _database;
+
 
   Future<Database>getDb() async{
     if(_database!=null){
@@ -28,18 +28,20 @@ class DbHelper{
     }
   }
 
-  Future addData(NoteModel noteModel)async{
+  Future<void> addData(NoteModel noteModel)async{
     var db =await getDb();
-    await db.insert(TABLENAME,noteModel.toMap());
+  await db.insert(TABLENAME,noteModel.toMap());
+
   }
 
   Future<List<NoteModel>> FetchData() async{
     var db = await getDb();
+    List<Map<String, dynamic>> data = await db.query(TABLENAME);
     List<NoteModel> arrlist=[];
-    var data = await db.query(TABLENAME);
+
     for(Map<String,dynamic>eachdata in data){
-      var data = NoteModel.fromMap(eachdata);
-      arrlist.add(data);
+      NoteModel notes = NoteModel.fromMap(eachdata);
+      arrlist.add(notes);
     }
     return arrlist;
   }

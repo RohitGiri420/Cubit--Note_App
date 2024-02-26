@@ -13,7 +13,7 @@ class NoteModel{
 
   Map<String,dynamic>toMap(){
     return{
-      DbHelper.NOTETITLE:Id,
+      DbHelper.NOTEID:Id,
       DbHelper.NOTETITLE:title,
       DbHelper.NOTEDESC:description,
     };
