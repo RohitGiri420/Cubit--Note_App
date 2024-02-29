@@ -1,7 +1,4 @@
-import 'package:cubit_note_app/Model/NoteModel.dart';
-import 'package:cubit_note_app/provider/NoteProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../widget/UiHelper.dart';
 
 class UpdateData extends StatefulWidget {

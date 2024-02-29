@@ -1,9 +1,6 @@
-import 'package:cubit_note_app/Model/NoteModel.dart';
-import 'package:cubit_note_app/provider/NoteProvider.dart';
 import 'package:cubit_note_app/widget/UiHelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AddData extends StatefulWidget {
   const AddData({super.key});
