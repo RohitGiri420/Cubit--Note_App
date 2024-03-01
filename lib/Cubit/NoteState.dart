@@ -8,9 +8,9 @@ class LoadingState extends NoteState{}
 
 class LoadedState extends NoteState{
   List<NoteModle> arrlist =[];
-  int id;
+  int? id;
 
-  LoadedState({required this.arrlist,required this.id});
+  LoadedState({required this.arrlist,this.id});
 }
 
 class ErrorState extends NoteState{

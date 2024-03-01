@@ -39,7 +39,7 @@ class DbHelper {
     return _database!;
   }
 
-  Future<void> AddData(NoteModle noteModle) async {
+  Future AddData(NoteModle noteModle) async {
     var db = await getDb();
     await db.insert(TABLENAME, noteModle.toMap());
   }
