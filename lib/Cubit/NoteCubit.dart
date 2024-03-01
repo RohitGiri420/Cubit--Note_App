@@ -42,9 +42,15 @@ class NoteCubit extends Cubit<NoteState> {
 
   DeleteData(int id) async{
     emit(LoadingState());
-    await dbHelper.DeleteData(id);
-    var Note = await dbHelper.FetchData();
-    emit(LoadedState(arrlist: Note));
+    bool check = await dbHelper.DeleteData(id);
+    if(check){
+      var Note = await dbHelper.FetchData();
+      emit(LoadedState(arrlist: Note));
+    }
+    else{
+      emit(ErrorState(ErrorMsg: "getting error while deleting data"));
+    }
+
   }
 
 
