@@ -18,26 +18,28 @@ class _AddDataState extends State<AddData> {
   TextEditingController titlecontroller = TextEditingController();
   TextEditingController desccontroller = TextEditingController();
   UiHelper ui = UiHelper();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ui.CostumTextField(titlecontroller, "Title"),
           ui.CostumTextField(desccontroller, "Descritpion"),
-          ElevatedButton(onPressed: (){
-            String title = titlecontroller.text;
-            String description = desccontroller.text;
-            if(title ==""&& description ==""){
-            log("enter Required Field");
-             }
-            else{
-              context.read<NoteCubit>().AddData(NoteModle(title: title, Description: description));
-              Navigator.pop(context);
-            }
-          }, child: Text("Add Data"))
+          ElevatedButton(
+              onPressed: () {
+                String title = titlecontroller.text;
+                String description = desccontroller.text;
+                if (title == "" && description == "") {
+                  log("enter Required Field");
+                } else {
+                  context.read<NoteCubit>().AddData(
+                      NoteModle(title: title, Description: description));
+                  Navigator.pop(context);
+                }
+              },
+              child: Text("Add Data"))
         ],
       ),
     );

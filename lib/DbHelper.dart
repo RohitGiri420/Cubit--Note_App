@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class DbHelper {
-
   Database? _database;
 
   static String TABLENAME = "NoteTable";
@@ -43,25 +42,25 @@ class DbHelper {
   Future<bool> AddData(NoteModle noteModle) async {
     var db = await getDb();
     var count = await db.insert(TABLENAME, noteModle.toMap());
-    return count>0;
+    return count > 0;
   }
 
-  Future<void> UpdateData(NoteModle noteModle)async{
+  Future<bool> UpdateData(NoteModle noteModle) async {
     var db = await getDb();
-    await db.update(TABLENAME, noteModle.toMap(),where: "$NOTEID = ${noteModle.id}");
-
+    var count = await db.update(TABLENAME, noteModle.toMap(), where: "$NOTEID = ${noteModle.id}");
+    return count > 0;
   }
-  
-  Future<void> DeleteData(int id) async{
+
+  Future<void> DeleteData(int id) async {
     var db = await getDb();
-    await db.delete(TABLENAME,where: "$NOTEID=?",whereArgs: [id.toString()]);
+    await db.delete(TABLENAME, where: "$NOTEID=?", whereArgs: [id.toString()]);
   }
 
-  Future<List<NoteModle>> FetchData() async{
+  Future<List<NoteModle>> FetchData() async {
     var db = await getDb();
     List<NoteModle> arrList = [];
     var data = await db.query(TABLENAME);
-    for(Map<String,dynamic> eachdata in data){
+    for (Map<String, dynamic> eachdata in data) {
       NoteModle noteModle = NoteModle.fromMap(eachdata);
       arrList.add(noteModle);
     }

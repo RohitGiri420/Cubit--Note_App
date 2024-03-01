@@ -1,19 +1,20 @@
 import 'package:cubit_note_app/Model/NoteModel.dart';
 
-abstract class NoteState{}
+abstract class NoteState {}
 
-class InitialState extends NoteState{}
+class InitialState extends NoteState {}
 
-class LoadingState extends NoteState{}
+class LoadingState extends NoteState {}
 
-class LoadedState extends NoteState{
-  List<NoteModle> arrlist =[];
+class LoadedState extends NoteState {
+  List<NoteModle> arrlist = [];
   int? id;
 
-  LoadedState({required this.arrlist,this.id});
+  LoadedState({required this.arrlist, this.id});
 }
 
-class ErrorState extends NoteState{
+class ErrorState extends NoteState {
   String ErrorMsg;
+
   ErrorState({required this.ErrorMsg});
 }
