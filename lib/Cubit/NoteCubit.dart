@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cubit_note_app/Cubit/NoteState.dart';
 import 'package:cubit_note_app/Model/NoteModel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +13,7 @@ class NoteCubit extends Cubit<NoteState>{
   AddData(NoteModle noteModle) async{
     emit(LoadingState());
     bool check = await dbHelper.AddData(noteModle);
+    log("$check");
     if(check)
       {
         var Notes = await dbHelper.FetchData();
@@ -19,7 +22,6 @@ class NoteCubit extends Cubit<NoteState>{
     else{
       emit(ErrorState(ErrorMsg: "Error while adding data"));
     }
-
   }
 
   GetData() async{

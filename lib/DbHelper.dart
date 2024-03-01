@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class DbHelper {
+
   Database? _database;
 
   static String TABLENAME = "NoteTable";
@@ -39,9 +40,10 @@ class DbHelper {
     return _database!;
   }
 
-  Future AddData(NoteModle noteModle) async {
+  Future<bool> AddData(NoteModle noteModle) async {
     var db = await getDb();
-    await db.insert(TABLENAME, noteModle.toMap());
+    var count = await db.insert(TABLENAME, noteModle.toMap());
+    return count>0;
   }
 
   Future<void> UpdateData(NoteModle noteModle)async{
